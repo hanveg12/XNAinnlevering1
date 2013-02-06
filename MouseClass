@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
+
+namespace Innlevering1
+{
+    class MouseClass
+    {
+        private MouseState _prevMouseState;
+        private MouseState _curMouseState;
+
+        public MouseClass()
+        {
+            _prevMouseState = new MouseState();
+            _curMouseState = new MouseState();
+        }
+
+        public Boolean MouseClick(Rectangle rectangle)
+        {
+            _prevMouseState = _curMouseState;
+            _curMouseState = Mouse.GetState();
+
+            if (_curMouseState.LeftButton == ButtonState.Pressed && _prevMouseState.LeftButton == ButtonState.Released && rectangle.Contains(_curMouseState.X, _curMouseState.Y))
+            {
+                Console.WriteLine("Click!");
+                return true;
+            } 
+            return false;
+        }
+    }
+}
