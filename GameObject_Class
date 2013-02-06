@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+
+namespace Innlevering1
+{
+    class GameObject
+    {
+        // Attributes/Member variables
+        public Texture2D Texture { get; private set; }
+        public Point Position { get; private set; }
+        public Point deltaPosition { get; set; }
+
+        // Constructor
+        public GameObject(Texture2D texture, Point position) {
+            this.Texture = texture;
+            this.Position = position;
+        }
+
+
+        // Methods
+        public void Draw(SpriteBatch spriteBatch) {
+
+            spriteBatch.Draw(Texture, new Rectangle(Position.X, Position.Y, Texture.Width, Texture.Height), Color.White);
+        }
+
+        public void Update() {
+            Position = new Point(Position.X + deltaPosition.X, Position.Y);// + deltaPosition.Y);
+        }
+        public int getPosition()
+        {
+            return Position.X;
+        }
+    }
+}
