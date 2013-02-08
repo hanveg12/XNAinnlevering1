@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+
+// Made by: Andreas Hanssveen, Andreas Nilsen, Andre Berntsen og Vegar Hansen
+
+namespace Innlevering1
+{
+    class GameObject
+    {
+        // Attributes/Member variables
+        public Texture2D Texture { get; private set; }
+        public Vector2 Position { get; set; }
+        public Vector2 deltaPosition { get; set; }
+
+        // Constructor
+        public GameObject(Texture2D texture, Vector2 position) {
+            this.Texture = texture;
+            this.Position = position;
+        }
+
+        // Methods
+        public void Draw(SpriteBatch spriteBatch) {
+
+            spriteBatch.Draw(Texture, Position, Color.White);
+        }
+
+        public void Update() {
+            Position = new Vector2(Position.X + deltaPosition.X, Position.Y);// + deltaPosition.Y);
+        }
+
+        private MouseState _prevMouseState;
+        private MouseState _curMouseState;
+        public Boolean MouseClick(Rectangle rectangle)
+        {
+            _prevMouseState = _curMouseState;
+            _curMouseState = Mouse.GetState();
+            if (_curMouseState.LeftButton == ButtonState.Pressed && _prevMouseState.LeftButton == ButtonState.Released && rectangle.Intersects(new Rectangle((int)_curMouseState.X,(int)_curMouseState.Y, 10,10)))
+            {
+                Console.WriteLine("Click!");
+                return true;
+            } 
+            return false;
+        }
+    }
+ }
